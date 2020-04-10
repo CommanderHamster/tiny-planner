@@ -1,15 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import "./normalize.css";
 import "./skeleton.css";
+import { getSearch } from "./api/search"
 
 function RecipeSearchForm() {
-  const selectStyle: any = {
+  const [searchText, setSearchText] = useState('')
+  const selectStyle: object = {
     overflowY: "auto",
     height: "100%"
   };
 
-  const boldStyle: any = {
+  const boldStyle: object = {
     fontWeight: "bold",
+  }
+
+  const handleSearchChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+    setSearchText(e.target.value)
+  }
+
+  const handleSubmit = () => {
+    getSearch({
+      q: searchText,
+      from: '0',
+      to: '3',
+      calories: '591-722',
+      health: 'alcohol-free'
+    })
   }
 
   return (
@@ -19,7 +35,13 @@ function RecipeSearchForm() {
       </div>
       <div className="row">
         <div className="u-full-width">
-          <input type="text" name="q" placeholder="Search" />
+          <input
+            type="text"
+            name="q"
+            value={searchText}
+            placeholder="Search"
+            onChange={handleSearchChange}
+          />
         </div>
       </div>
 
@@ -103,7 +125,7 @@ function RecipeSearchForm() {
       </div>
       <div className="row">
         <div className="u-full-width">
-          <button className="u-pull-right" value="Search" type="submit">Search</button>
+          <button className="u-pull-right" onClick={handleSubmit} value="Search" type="submit">Search</button>
         </div>
       </div>
     </span>
