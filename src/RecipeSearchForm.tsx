@@ -2,9 +2,19 @@ import React, { useState } from "react";
 import "./normalize.css";
 import "./skeleton.css";
 import { getSearch } from "./api/search"
+import { Field, reduxForm } from 'redux-form'
 
-function RecipeSearchForm() {
-  const [searchText, setSearchText] = useState('')
+const searchFormSubmit = (values: { searchText: string}) => {
+  getSearch({
+    q: values.searchText,
+    from: '0',
+    to: '3',
+    calories: '591-722',
+    health: 'alcohol-free'
+  })
+}
+
+function RecipeSearchForm(props: { handleSubmit: any }) {
   const selectStyle: object = {
     overflowY: "auto",
     height: "100%"
@@ -14,33 +24,18 @@ function RecipeSearchForm() {
     fontWeight: "bold",
   }
 
-  const handleSearchChange = (e:React.ChangeEvent<HTMLInputElement>) => {
-    setSearchText(e.target.value)
-  }
-
-  const handleSubmit = () => {
-    getSearch({
-      q: searchText,
-      from: '0',
-      to: '3',
-      calories: '591-722',
-      health: 'alcohol-free'
-    })
-  }
-
   return (
-    <span>
+    <form onSubmit={props.handleSubmit}>
       <div className="row">
         <div className="u-full-width" style={boldStyle}>Search Recipes</div>
       </div>
       <div className="row">
         <div className="u-full-width">
-          <input
-            type="text"
+          <Field
             name="q"
-            value={searchText}
+            component="input"
+            type="text"
             placeholder="Search"
-            onChange={handleSearchChange}
           />
         </div>
       </div>
@@ -125,11 +120,16 @@ function RecipeSearchForm() {
       </div>
       <div className="row">
         <div className="u-full-width">
-          <button className="u-pull-right" onClick={handleSubmit} value="Search" type="submit">Search</button>
+          <button className="u-pull-right" value="Search" type="submit">Search</button>
         </div>
       </div>
-    </span>
+    </form>
   );
 }
 
-export default RecipeSearchForm;
+// export default RecipeSearchForm;
+export default reduxForm({
+  form: 'SEARCH_FORM',
+  onSubmit: searchFormSubmit
+}
+)(RecipeSearchForm);
