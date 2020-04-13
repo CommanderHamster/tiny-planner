@@ -27,13 +27,13 @@ const AddMealButton = (props: { recipe: any }) => {
   if (!daySelected) {
     return (
       <div>
-        <Button className="m-1" size="sm" onClick={() => setDaySelected('sun')}>Sunday</Button>
-        <Button className="m-1" size="sm" onClick={() => setDaySelected('mon')}>Monday</Button>
-        <Button className="m-1" size="sm" onClick={() => setDaySelected('tue')}>Tuesday</Button>
-        <Button className="m-1" size="sm" onClick={() => setDaySelected('wed')}>Wednesday</Button>
-        <Button className="m-1" size="sm" onClick={() => setDaySelected('thu')}>Thursday</Button>
-        <Button className="m-1" size="sm" onClick={() => setDaySelected('fri')}>Friday</Button>
-        <Button className="m-1" size="sm" onClick={() => setDaySelected('sat')}>Saturday</Button>
+        <Button className="m-1" size="sm" onClick={() => setDaySelected('Sunday')}>Sunday</Button>
+        <Button className="m-1" size="sm" onClick={() => setDaySelected('Monday')}>Monday</Button>
+        <Button className="m-1" size="sm" onClick={() => setDaySelected('Tuesday')}>Tuesday</Button>
+        <Button className="m-1" size="sm" onClick={() => setDaySelected('Wednesday')}>Wednesday</Button>
+        <Button className="m-1" size="sm" onClick={() => setDaySelected('Thursday')}>Thursday</Button>
+        <Button className="m-1" size="sm" onClick={() => setDaySelected('Friday')}>Friday</Button>
+        <Button className="m-1" size="sm" onClick={() => setDaySelected('Saturday')}>Saturday</Button>
       </div>
     )
   }
@@ -41,10 +41,10 @@ const AddMealButton = (props: { recipe: any }) => {
   if (!mealTypeSelected) {
     return (
       <div>
-        <Button className="m-1" size="sm" onClick={addToMealPlan('breakfast')}>Breakfast</Button>
-        <Button className="m-1" size="sm" onClick={addToMealPlan('lunch')}>Lunch</Button>
-        <Button className="m-1" size="sm" onClick={addToMealPlan('dinner')}>Dinner</Button>
-        <Button className="m-1" size="sm" onClick={addToMealPlan('snack')}>Snack</Button>
+        <Button className="m-1" size="sm" onClick={addToMealPlan('Breakfast')}>Breakfast</Button>
+        <Button className="m-1" size="sm" onClick={addToMealPlan('Lunch')}>Lunch</Button>
+        <Button className="m-1" size="sm" onClick={addToMealPlan('Dinner')}>Dinner</Button>
+        <Button className="m-1" size="sm" onClick={addToMealPlan('Snack')}>Snack</Button>
       </div>
     )
   }

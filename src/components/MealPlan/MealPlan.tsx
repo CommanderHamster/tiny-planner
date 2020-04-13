@@ -1,14 +1,14 @@
 import React from 'react'
 import { useSelector } from "react-redux"
-import {Button, Row, Table} from "react-bootstrap"
-import {map, isEmpty} from 'lodash'
+import {map, isEmpty, groupBy} from 'lodash'
+import MealPlanDay from "../MealPlanDay/MealPlanDay";
 
 const MealPlan = () => {
   const mealPlanR = useSelector((state: {mealPlanR: any}) => state.mealPlanR)
   const isMealPlanEmpty = isEmpty(mealPlanR)
-  debugger
+  const mealPlanGroupedByDay = groupBy(mealPlanR, 'day')
   return (
-    <div>
+    <div className="MealPlan mb-5">
       <h3>Meal Plan</h3>
 
       {
@@ -17,24 +17,9 @@ const MealPlan = () => {
 
       {
         !isMealPlanEmpty &&
-        <Table>
-          <thead>
-          <tr>
-            <th>Dish Name</th>
-          </tr>
-          </thead>
-          <tbody>
-          {
-            map(mealPlanR, (meal) => {
-              return (
-                <tr key={meal.label}>
-                  <td>{meal.label}</td>
-                </tr>
-              )
-            })
-          }
-          </tbody>
-        </Table>
+        map(mealPlanGroupedByDay, (recipes, day) => {
+          return <MealPlanDay key={day} day={day} recipes={recipes} />
+        })
       }
     </div>
   )
