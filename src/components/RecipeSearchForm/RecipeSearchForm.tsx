@@ -22,9 +22,6 @@ const searchFormSubmit = (values: FormValues , dispatch: any) => {
       diet: map(values.diet, ({value}) => value),
       health: map(values.health, ({value}) => value),
       cuisineType: map(values.cuisineType, ({value}) => value)
-      // from: '0',
-      // to: '3',
-      // calories: '591-722',
     }))
 }
 
