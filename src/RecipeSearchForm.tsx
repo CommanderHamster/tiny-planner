@@ -106,7 +106,7 @@ function RecipeSearchForm(props: { handleSubmit: any }) {
           <label>
             Cuisine Type<br/>
             <Field
-              name="meal_type"
+              name="cuisine_type"
               component={SelectField}
               options={[
                 { label: 'American', value: 'American' },
