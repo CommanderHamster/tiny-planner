@@ -1,18 +1,20 @@
 import React from 'react'
 import RecipeSearchForm from './RecipeSearchForm'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Container, Row, Col } from 'react-bootstrap'
 
 function App() {
   return (
-    <div className="container">
-      <div className="row">
-        <div className="u-full-width">
-          <header className="App-header">
+    <Container>
+      <Row>
+        <Col>
+          <h1 className="App-header">
             Surely Meal Planner
-          </header>
-        </div>
-      </div>
+          </h1>
+        </Col>
+      </Row>
       <RecipeSearchForm />
-    </div>
+    </Container>
   )
 }
 

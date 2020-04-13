@@ -2,6 +2,7 @@ import React from "react"
 import { getSearch } from "./api/search"
 import { Field, reduxForm } from 'redux-form'
 import SelectField from './fields/SelectField/SelectField'
+import { Button, Row, Col } from 'react-bootstrap'
 
 const searchFormSubmit = (values: { searchText: string}) => {
   debugger
@@ -26,24 +27,25 @@ function RecipeSearchForm(props: { handleSubmit: any }) {
 
   return (
     <form onSubmit={props.handleSubmit}>
-      <div className="row">
-        <div className="u-full-width" style={boldStyle}>Search Recipes</div>
-      </div>
-      <div className="row">
-        <div className="u-full-width">
+      <Row>
+        <Col className="w-100 mb-1" style={boldStyle}>Search Recipes</Col>
+      </Row>
+      <Row>
+        <Col className="w-100">
           <Field
             name="q"
             component="input"
             type="text"
             placeholder="Search"
+            className="form-control"
           />
-        </div>
-      </div>
+        </Col>
+      </Row>
 
-      <div className="row">
-        <div className="six columns">
-          <label>
-            Meal Type<br/>
+      <Row className="mt-2">
+        <Col>
+          <label className="w-100">
+            <div className="mb-1">Meal Type</div>
             <Field
               name="meal_type"
               component={SelectField}
@@ -55,10 +57,10 @@ function RecipeSearchForm(props: { handleSubmit: any }) {
               ]}
             />
           </label>
-        </div>
-        <div className="six columns">
-          <label>
-            Diet<br/>
+        </Col>
+        <Col>
+          <label className="w-100">
+            <div className="mb-1">Diet</div>
             <Field
               name="diet"
               component={SelectField}
@@ -72,12 +74,12 @@ function RecipeSearchForm(props: { handleSubmit: any }) {
               ]}
             />
           </label>
-        </div>
-      </div>
-      <div className="row">
-        <div className="six columns">
-          <label>
-            Health Type<br/>
+        </Col>
+      </Row>
+      <Row className="mt-2">
+        <Col>
+          <label className="w-100">
+            <div className="mb-1">Health Type</div>
             <Field
               name="health_type"
               component={SelectField}
@@ -100,11 +102,11 @@ function RecipeSearchForm(props: { handleSubmit: any }) {
               ]}
             />
           </label>
-        </div>
+        </Col>
 
-        <div className="six columns">
-          <label>
-            Cuisine Type<br/>
+        <Col>
+          <label className="w-100">
+            <div className="mb-1">Cuisine Type</div>
             <Field
               name="cuisine_type"
               component={SelectField}
@@ -130,20 +132,20 @@ function RecipeSearchForm(props: { handleSubmit: any }) {
               ]}
             />
           </label>
-        </div>
-      </div>
-      <div className="row">
-        <div className="u-full-width">
-          <button className="u-pull-right" value="Search" type="submit">Search</button>
-        </div>
-      </div>
+        </Col>
+      </Row>
+      <Row className="mt-2">
+        <Col className="w-100">
+          <Button className="float-right" value="Search" type="submit">Search</Button>
+        </Col>
+      </Row>
     </form>
   )
 }
 
 // export default RecipeSearchForm
 export default reduxForm({
-  form: 'SEARCH_FORM',
-  onSubmit: searchFormSubmit
-}
+    form: 'SEARCH_FORM',
+    onSubmit: searchFormSubmit
+  }
 )(RecipeSearchForm)
