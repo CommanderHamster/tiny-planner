@@ -1,11 +1,10 @@
 import {createSlice} from "@reduxjs/toolkit"
-import {merge} from 'lodash'
 
 const mealPlanSlice = createSlice({
   name: 'mealPlanR',
-  initialState: {},
+  initialState: [],
   reducers: {
-    addMeal: (state, action) => { return merge({}, state, { [action.payload.label]: action.payload }) },
+    addMeal: (state, action) => state.concat(action.payload),
   }
 })
 

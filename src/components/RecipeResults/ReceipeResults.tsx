@@ -4,6 +4,7 @@ import { addMeal } from '../../store/reducers/mealPlan'
 import {Button, Row, Table} from "react-bootstrap"
 import { useDispatch } from 'react-redux'
 import {map, isEmpty} from 'lodash'
+import AddMealButton from "../AddMealButton/AddMealButton";
 
 const RecipeResults = () => {
   const searchR = useSelector((state: {searchR: any}) => state.searchR)
@@ -34,7 +35,7 @@ const RecipeResults = () => {
               return (
                 <tr key={recipe.label}>
                   <td>{recipe.label}</td>
-                  <td><Button onClick={() => dispatch(addMeal(recipe))}>Add</Button></td>
+                  <td><AddMealButton recipe={recipe} /></td>
                 </tr>
               )
             })
