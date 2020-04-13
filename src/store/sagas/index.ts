@@ -4,7 +4,7 @@ import searchS from './searchS'
 function* rootS() {
   yield all([
     fork(searchS)
-  ]);
+  ])
 }
 
-export default rootS;
+export default rootS

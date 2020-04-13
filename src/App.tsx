@@ -1,7 +1,5 @@
-import React from 'react';
-import RecipeSearchForm from './RecipeSearchForm';
-import './normalize.css';
-import './skeleton.css';
+import React from 'react'
+import RecipeSearchForm from './RecipeSearchForm'
 
 function App() {
   return (
@@ -15,7 +13,7 @@ function App() {
       </div>
       <RecipeSearchForm />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
