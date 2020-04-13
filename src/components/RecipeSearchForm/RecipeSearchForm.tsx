@@ -2,6 +2,7 @@ import React from "react"
 import {Field, FormErrors, InjectedFormProps, reduxForm} from 'redux-form'
 import SelectField from '../fields/SelectField/SelectField'
 import InputField from '../fields/InputField/InputField'
+import { GET_SEARCH_REQUESTED } from '../../store/reducers/search'
 import { Button, Row, Col } from 'react-bootstrap'
 import { map } from 'lodash'
 
@@ -15,9 +16,7 @@ interface FormValues {
 }
 
 const searchFormSubmit = (values: FormValues , dispatch: any) => {
-  dispatch({
-    type: 'GET_SEARCH_REQUESTED',
-    payload: {
+  dispatch(GET_SEARCH_REQUESTED({
       q: values.q,
       mealType: map(values.mealType, ({value}) => value),
       diet: map(values.diet, ({value}) => value),
@@ -26,9 +25,7 @@ const searchFormSubmit = (values: FormValues , dispatch: any) => {
       // from: '0',
       // to: '3',
       // calories: '591-722',
-
-    }
-  })
+    }))
 }
 
 const searchFormValidate = (values: FormValues): FormErrors<FormValues> => {
