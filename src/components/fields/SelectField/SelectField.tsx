@@ -1,6 +1,5 @@
 import React from 'react';
 import Select from 'react-select';
-import { get, find } from 'lodash';
 
 const SelectField = (props: {
   options: object[],

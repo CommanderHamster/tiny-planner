@@ -1,43 +1,55 @@
 import React from "react"
-import { getSearch } from "./api/search"
-import { Field, reduxForm } from 'redux-form'
-import SelectField from './fields/SelectField/SelectField'
+import {Field, FormErrors, InjectedFormProps, reduxForm} from 'redux-form'
+import SelectField from '../fields/SelectField/SelectField'
+import InputField from '../fields/InputField/InputField'
 import { Button, Row, Col } from 'react-bootstrap'
+import { map } from 'lodash'
 
-const searchFormSubmit = (values: { searchText: string}) => {
-  debugger
-  getSearch({
-    q: values.searchText,
-    from: '0',
-    to: '3',
-    calories: '591-722',
-    health: 'alcohol-free'
+
+interface FormValues {
+  q: string,
+  mealType: {value: string, label: string}[],
+  diet: {value: string, label: string}[],
+  health: {value: string, label: string}[],
+  cuisineType: {value: string, label: string}[],
+}
+
+const searchFormSubmit = (values: FormValues , dispatch: any) => {
+  dispatch({
+    type: 'GET_SEARCH_REQUESTED',
+    payload: {
+      q: values.q,
+      mealType: map(values.mealType, ({value}) => value),
+      diet: map(values.diet, ({value}) => value),
+      health: map(values.health, ({value}) => value),
+      cuisineType: map(values.cuisineType, ({value}) => value)
+      // from: '0',
+      // to: '3',
+      // calories: '591-722',
+
+    }
   })
 }
 
-function RecipeSearchForm(props: { handleSubmit: any }) {
-  const selectStyle: object = {
-    overflowY: "auto",
-    height: "100%"
+const searchFormValidate = (values: FormValues): FormErrors<FormValues> => {
+  return {
+    q: !values.q ? 'Search value is required' : ''
   }
+}
 
-  const boldStyle: object = {
-    fontWeight: "bold",
-  }
-
+function RecipeSearchForm(props: InjectedFormProps<FormValues, any>) {
   return (
     <form onSubmit={props.handleSubmit}>
       <Row>
-        <Col className="w-100 mb-1" style={boldStyle}>Search Recipes</Col>
+        <Col className="w-100 mb-1" style={{ fontWeight: "bold" }}>Search Recipes</Col>
       </Row>
       <Row>
         <Col className="w-100">
           <Field
             name="q"
-            component="input"
+            component={InputField}
             type="text"
             placeholder="Search"
-            className="form-control"
           />
         </Col>
       </Row>
@@ -47,7 +59,7 @@ function RecipeSearchForm(props: { handleSubmit: any }) {
           <label className="w-100">
             <div className="mb-1">Meal Type</div>
             <Field
-              name="meal_type"
+              name="mealType"
               component={SelectField}
               options={[
                 { label: 'Breakfast', value: 'Breakfast' },
@@ -81,7 +93,7 @@ function RecipeSearchForm(props: { handleSubmit: any }) {
           <label className="w-100">
             <div className="mb-1">Health Type</div>
             <Field
-              name="health_type"
+              name="health"
               component={SelectField}
               options={[
                 { label: 'Bread', value: 'Bread' },
@@ -108,7 +120,7 @@ function RecipeSearchForm(props: { handleSubmit: any }) {
           <label className="w-100">
             <div className="mb-1">Cuisine Type</div>
             <Field
-              name="cuisine_type"
+              name="cuisineType"
               component={SelectField}
               options={[
                 { label: 'American', value: 'American' },
@@ -146,6 +158,7 @@ function RecipeSearchForm(props: { handleSubmit: any }) {
 // export default RecipeSearchForm
 export default reduxForm({
     form: 'SEARCH_FORM',
-    onSubmit: searchFormSubmit
+    onSubmit: searchFormSubmit,
+    validate: searchFormValidate
   }
 )(RecipeSearchForm)

@@ -1,5 +1,5 @@
 import React from 'react'
-import RecipeSearchForm from './RecipeSearchForm'
+import RecipeSearchForm from '../RecipeSearchForm/RecipeSearchForm'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col } from 'react-bootstrap'
 
